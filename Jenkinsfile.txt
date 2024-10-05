@@ -4,21 +4,27 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Checkout the code from Git
-                git branch: 'main', url: 'https://github.com/HARINI-V33/java_jenkins.git'
+                git url: 'https://github.com/HARINI-V33/java_jenkins.git', branch: 'main'
             }
         }
 
         stage('Compile Java Code') {
             steps {
                 // Compile Java code
-                sh 'javac -d target Main.java'
+                script{
+                    bat '''
+                        javac -d target Main.java
+                }    '''
             }
         }
 
         stage('Run Java Code') {
             steps {
                 // Run the Java application
-                sh 'java -cp target Main'
+                 script{
+                    bat '''
+                        java -cp target Main
+                } 
             }
         }
     }
