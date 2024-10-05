@@ -1,41 +1,46 @@
 pipeline {
     agent any
+
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                // Checkout the code from Git
-                git url: 'https://github.com/HARINI-V33/java_jenkins.git', branch: 'main'
+                // Clone the Git repository
+                git url: 'https://github.com/HARINI-V33/java_jenkins.git', branch: 'main' // Update with your repo URL and branch
             }
         }
 
-        stage('Compile Java Code') {
+        stage('Compile') {
             steps {
-                // Compile Java code
-                script{
+                script {
+                    // Change directory and compile the Java file
                     bat '''
                         javac -d target Main.java
-                }    '''
+                    '''
+                }
             }
         }
 
-        stage('Run Java Code') {
+        stage('Run') {
             steps {
-                // Run the Java application
-                 script{
+                script {
+                    // Run the compiled Java program
                     bat '''
                         java -cp target Main
                     '''
-                } 
+                }
             }
         }
     }
 
     post {
         always {
-            // Archive the output and any other build artifacts if necessary
-            archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
-            // Show the build log
-            echo 'Build complete.'
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed.'
         }
     }
 }
