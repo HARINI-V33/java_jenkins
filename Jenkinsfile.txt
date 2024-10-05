@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Checkout the code from Git
+                git branch: 'main', url: 'https://github.com/HARINI-V33/java_jenkins.git'
+            }
+        }
+
+        stage('Compile Java Code') {
+            steps {
+                // Compile Java code
+                sh 'javac -d target src/com/example/Main.java'
+            }
+        }
+
+        stage('Run Java Code') {
+            steps {
+                // Run the Java application
+                sh 'java -cp target com.example.Main'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive the output and any other build artifacts if necessary
+            archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
+            // Show the build log
+            echo 'Build complete.'
+        }
+    }
+}
