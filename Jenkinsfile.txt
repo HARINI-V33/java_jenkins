@@ -11,14 +11,14 @@ pipeline {
         stage('Compile Java Code') {
             steps {
                 // Compile Java code
-                sh 'javac -d target src/com/example/Main.java'
+                sh 'javac -d target Main.java'
             }
         }
 
         stage('Run Java Code') {
             steps {
                 // Run the Java application
-                sh 'java -cp target com.example.Main'
+                sh 'java -cp target Main'
             }
         }
     }
