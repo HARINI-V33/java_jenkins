@@ -12,6 +12,7 @@ public class Main {
             f1=f2;
             f2=temp;
             System.out.print(f1);
+            System.out.print(" ");
         }
     }
 }
