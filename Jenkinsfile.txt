@@ -2,45 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('version') {
             steps {
-                // Clone the Git repository
-                git url: 'https://github.com/HARINI-V33/java_jenkins.git', branch: 'main' // Update with your repo URL and branch
+                echo 'version'
             }
         }
-
-        stage('Compile') {
+        stage('Hello') {
             steps {
-                script {
-                    // Change directory and compile the Java file
-                    bat '''
-                        javac -d target Main.java
-                    '''
-                }
+                echo 'Hello World'
+                sh 'javac Main.java'
+                sh 'java Main'
             }
-        }
-
-        stage('Run') {
-            steps {
-                script {
-                    // Run the compiled Java program
-                    bat '''
-                        java -cp target Main
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline completed.'
-        }
-        success {
-            echo 'Build succeeded!'
-        }
-        failure {
-            echo 'Build failed.'
         }
     }
 }
