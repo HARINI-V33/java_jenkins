@@ -12,5 +12,6 @@ public class Main {
             f1=f2;
             f2=new;
             System.out.print(f1);
+        }
     }
 }
