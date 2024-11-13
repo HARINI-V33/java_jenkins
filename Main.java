@@ -6,7 +6,7 @@ public class Main {
         System.out.println("Fibonacci Sequence");
         int f1=1;
         int f2=2;
-        int new;
+        int new=0;
         for(int i=0;i<15;i++){
             new=f1+f2;
             f1=f2;
